@@ -1,4 +1,4 @@
-import base64
+﻿import base64
 import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -28,4 +28,4 @@ def encode():
     return jsonify({"encoded": base64.b64encode(encoded).decode()})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
