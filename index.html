@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goedge 分遗产 | Keygen WebUI</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-image: url('https://api.demonsword.top/assets/background/picture.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                background-image: url('https://api.demonsword.top/assets/background/hpd.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 80px;
+        }
+
+        h1 {
+            font-size: 24px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .form-control, .form-control:focus {
+            border-radius: 4px;
+        }
+
+        button {
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-generate, .btn-copy {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+        .btn-generate:hover, .btn-copy:hover {
+            background-color: #0056b3;
+        }
+
+        pre {
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        #result-container {
+            display: none;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+            z-index: 100;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Goedge 分遗产 | Keygen WebUI</h1>
+        <form id="apiForm">
+            <div class="form-group">
+                <label for="dayFrom">授权开始时间 (留空默认 2000-12-31):</label>
+                <input type="date" class="form-control" id="dayFrom" name="dayFrom">
+            </div>
+
+            <div class="form-group">
+                <label for="dayTo">授权到期时间 (默认永久权限):</label>
+                <input type="date" class="form-control" id="dayTo" name="dayTo">
+            </div>
+
+            <div class="form-group">
+                <label for="company">公司/组织名 (company):</label>
+                <input type="text" class="form-control" id="company" name="company" placeholder="Goedge 分遗产群 | WebUI 版本">
+            </div>
+
+            <div class="form-group">
+                <label for="edition">版本 (edition):</label>
+                <select id="edition" name="edition" class="form-control" required>
+                    <option value="basic">个人商业版 (basic)</option>
+                    <option value="pro">专业版 (pro)</option>
+                    <option value="ent">企业版 (ent)</option>
+                    <option value="ultra">旗舰版 (ultra)</option>
+                    <option value="maxsub">未知版本 (maxsub)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="nodes">最大节点数限制 (默认为 99999999999):</label>
+                <input type="number" class="form-control" id="nodes" name="nodes" value="0" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="email">电子邮件 (email):</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="goedge@163.com">
+            </div>
+
+            <button type="submit" class="btn btn-generate">提交</button>
+        </form>
+
+        <div id="result-container" class="mt-4">
+            <h2 class="text-center">激活码:</h2>
+            <pre id="result"></pre>
+            <button id="copyBtn" class="btn btn-copy mt-3">点击复制</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>本项目是 <a href="https://github.com/oswaldlow/keygen-python-webui" target="_blank">开源项目</a>，特别感谢 <a href="https://github.com/GoEdge233/keygen-python" target="_blank">goedge233</a>。</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('apiForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const dayFrom = document.getElementById('dayFrom').value || "2000-12-31";
+            const dayTo = document.getElementById('dayTo').value || "9999-12-31";
+            const company = document.getElementById('company').value || "Goedge 分遗产群 | WebUI 版本";
+            const edition = document.getElementById('edition').value;
+            const nodes = parseInt(document.getElementById('nodes').value, 10) || 99999999999;
+            const email = document.getElementById('email').value || "goedge@163.com";
+
+            const data = {
+                id: "",
+                dayFrom: dayFrom,
+                dayTo: dayTo,
+                macAddresses: [],
+                requestCode: "",
+                hostname: "*",
+                company: company,
+                nodes: nodes,
+                updatedAt: Math.floor(Date.now() / 1000),
+                components: ["*"],
+                edition: edition,
+                email: email,
+                method: "internet"
+            };
+
+            fetch('http://127.0.0.1:5000/encode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const encoded = data.encoded;
+                const resultElement = document.getElementById('result');
+                resultElement.textContent = encoded;
+
+                // 显示激活码和复制按钮
+                const resultContainer = document.getElementById('result-container');
+                resultContainer.style.display = 'block';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                document.getElementById('result').textContent = 'Error: ' + error;
+            });
+        });
+
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            const resultElement = document.getElementById('result');
+            const text = resultElement.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                alert('激活码已复制到剪贴板');
+            }).catch((error) => {
+                console.error('复制失败:', error);
+            });
+        });
+    </script>
+</body>
+</html>
